@@ -9,7 +9,7 @@
 :root{
   --blue:#2253A5; --blue-dk:#00609F; --navy:#040D40; --green:#26B34C;
   --lav:#D6D9EB; --lav-soft:#EEF0F7; --mint:#DAEBD6; --white:#FFFFFF; --muted:#4A5278;
-  --warn-bg:#FFF4CC; --warn-fg:#5A4500; --err:#B3261E;
+  --warn-bg:#FFF4CC; --warn-fg:#5A4500;
   --display:"Barlow Semi Condensed","DIN 2014","Arial Narrow",sans-serif;
   --body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:light;
@@ -97,31 +97,7 @@ section.band .wrap{padding-block:80px}
 .form-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start}
 .form-side p{color:var(--navy)}
 .form-side ul{padding-left:18px;margin:16px 0 0;display:grid;gap:8px}
-form.apply{background:var(--white);padding:32px;display:grid;gap:20px;min-width:0}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.field{display:grid;gap:6px;min-width:0}
-.field label,.field .lbl{font-weight:700;font-size:14px}
-.field .hint{font-size:13px;color:var(--muted)}
-.req{color:var(--blue)}
-input[type=text],input[type=email],textarea{width:100%;font:inherit;font-size:16px;color:var(--navy);background:var(--white);border:1.5px solid #B8BED8;border-radius:0;padding:13px 14px}
-input:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(34,83,165,.18)}
-textarea{min-height:150px;resize:vertical;line-height:1.5}
-.count{font-size:12px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
-.drop{border:2px dashed #9AA3CC;background:var(--lav-soft);padding:22px;display:grid;gap:6px;justify-items:start;cursor:pointer;position:relative}
-.drop.over{border-color:var(--blue);background:#E3E8F6}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
-.drop strong{font-size:15px}
-.drop .file{font-weight:700;color:var(--blue);word-break:break-all}
-.check{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-size:14px}
-.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--blue)}
-.err{color:var(--err);font-size:13px;font-weight:600;min-height:0}
-.invalid{border-color:var(--err)!important}
-form.apply .btn{justify-self:start;padding:16px 34px;font-size:14px}
-.done{background:var(--white);padding:40px 32px;display:grid;gap:14px;border-top:10px solid var(--green)}
-.done h3{font-size:34px;color:var(--blue)}
-.done p{margin:0}
 @media (max-width:860px){.form-grid{grid-template-columns:1fr;gap:28px}}
-@media (max-width:520px){.row{grid-template-columns:1fr}form.apply{padding:22px}}
 
 footer{background:var(--navy);color:#C9CEE6;font-size:14px}
 footer .wrap{padding-block:40px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -131,7 +107,7 @@ footer p{margin:0;max-width:38rem}
 </style>
 </head><body>
 
-<div class="proto" role="note"><div class="wrap"><b>Prototype</b><span>Sample design for review by the transition team. Not an official campaign or transition site, and the form does not collect anything.</span></div></div>
+<div class="proto" role="note"><div class="wrap"><b>Prototype</b><span>Sample design for review by the transition team. Not an official campaign or transition site. Submissions are stored for review purposes only.</span></div></div>
 
 <header class="top">
   <div class="wrap">
@@ -226,39 +202,9 @@ footer p{margin:0;max-width:38rem}
       </div>
 
       <div id="formWrap">
-        <form class="apply" id="applyForm" novalidate>
-          <div class="row">
-            <div class="field"><label for="first">First name <span class="req">*</span></label><input id="first" name="first" type="text" autocomplete="given-name" required><span class="err" id="first-err"></span></div>
-            <div class="field"><label for="last">Last name <span class="req">*</span></label><input id="last" name="last" type="text" autocomplete="family-name" required><span class="err" id="last-err"></span></div>
-          </div>
-          <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required><span class="err" id="email-err"></span></div>
-          <div class="field">
-            <label for="interest">Your interest in the Foulkes administration <span class="req">*</span></label>
-            <span class="hint" id="interest-hint">What would you want to work on, and what experience would you bring? A few sentences is plenty.</span>
-            <textarea id="interest" name="interest" maxlength="1500" aria-describedby="interest-hint" required></textarea>
-            <div class="count"><span id="cnt">0</span> / 1,500</div>
-            <span class="err" id="interest-err"></span>
-          </div>
-          <div class="field">
-            <span class="lbl" id="resume-lbl">Résumé or CV <span class="req">*</span></span>
-            <div class="drop" id="drop">
-              <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" aria-labelledby="resume-lbl" required>
-              <strong>Drop your file here or tap to choose</strong>
-              <span class="hint">PDF or Word, up to 5 MB</span>
-              <span class="file" id="fileName" hidden></span>
-            </div>
-            <span class="err" id="resume-err"></span>
-          </div>
-          <label class="check" for="consent"><input id="consent" type="checkbox" required><span>I agree that the transition team may store my information and contact me about opportunities to serve.</span></label>
-          <span class="err" id="consent-err"></span>
-          <button class="btn btn-blue" type="submit">Submit</button>
-        </form>
-        <div class="done" id="done" hidden>
-          <h3>Thank you, <span id="doneName"></span>.</h3>
-          <p>Your information is with the transition team. If there's a fit, someone will reach out at <strong id="doneEmail"></strong>.</p>
-          <p class="hint" style="color:var(--muted);font-size:13px">Prototype: nothing was sent or stored.</p>
-          <button class="btn btn-lav" type="button" id="again" style="justify-self:start">Submit another</button>
-        </div>
+        <!-- Fillout form embed, connected to the "Resumes" Notion database. -->
+        <div style="width:100%;height:720px;" data-fillout-id="wdJmwAyxsius" data-fillout-embed-type="standard" data-fillout-inherit-parameters data-fillout-dynamic-resize></div>
+        <script src="https://server.fillout.com/embed/v1/"></script>
       </div>
     </div>
   </section>
@@ -274,39 +220,4 @@ footer p{margin:0;max-width:38rem}
   </div>
 </footer>
 
-<script>
-(function(){
-  const f=document.getElementById('applyForm');
-  const ta=document.getElementById('interest'), cnt=document.getElementById('cnt');
-  ta.addEventListener('input',()=>{cnt.textContent=ta.value.length.toLocaleString()});
-  const drop=document.getElementById('drop'), file=document.getElementById('resume'), fn=document.getElementById('fileName');
-  const MAX=5*1024*1024, OK=/\.(pdf|docx?)$/i;
-  function showFile(){const x=file.files[0]; if(x){fn.textContent=x.name+' · '+(x.size/1024/1024).toFixed(1)+' MB'; fn.hidden=false;} else {fn.hidden=true;}}
-  file.addEventListener('change',showFile);
-  ['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over')}));
-  ['dragleave','drop'].forEach(e=>drop.addEventListener(e,()=>drop.classList.remove('over')));
-  drop.addEventListener('drop',ev=>{ev.preventDefault(); if(ev.dataTransfer.files.length){try{file.files=ev.dataTransfer.files;}catch(e){} showFile();}});
-  function setErr(id,msg,el){document.getElementById(id+'-err').textContent=msg||''; if(el) el.classList.toggle('invalid',!!msg);}
-  f.addEventListener('submit',ev=>{
-    ev.preventDefault();
-    let bad=null;
-    const v=(id)=>document.getElementById(id);
-    const checks=[
-      ['first', v('first').value.trim()?'':'Enter your first name.', v('first')],
-      ['last', v('last').value.trim()?'':'Enter your last name.', v('last')],
-      ['email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email').value.trim())?'':'Enter an email address like name@example.com.', v('email')],
-      ['interest', ta.value.trim().length>=20?'':'Add a few sentences about what you would work on.', ta],
-      ['resume', !file.files[0]?'Attach your résumé.':(!OK.test(file.files[0].name)?'Use a PDF or Word file.':(file.files[0].size>MAX?'That file is over 5 MB. Try a smaller PDF.':'')), drop],
-      ['consent', v('consent').checked?'':'Check the box so the team can contact you.', null]
-    ];
-    checks.forEach(([id,msg,el])=>{setErr(id,msg,el); if(msg&&!bad) bad=el||v(id);});
-    if(bad){(bad.querySelector?.('input')||bad).focus?.(); return;}
-    document.getElementById('doneName').textContent=v('first').value.trim();
-    document.getElementById('doneEmail').textContent=v('email').value.trim();
-    f.hidden=true; document.getElementById('done').hidden=false;
-    document.getElementById('done').scrollIntoView({block:'center'});
-  });
-  document.getElementById('again').addEventListener('click',()=>{f.reset();fn.hidden=true;cnt.textContent='0';f.hidden=false;document.getElementById('done').hidden=true;});
-})();
-</script>
 </body></html>
