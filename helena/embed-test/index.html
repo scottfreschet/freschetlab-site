@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notion form embed test</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{--blue:#2253A5;--navy:#040D40;--lav:#D6D9EB;--mint:#DAEBD6;--warn:#FFF4CC}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--navy);background:#F5F6FA}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:26px;margin:0 0 8px}
+  p{margin:0 0 12px;line-height:1.5}
+  form{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+  input{flex:1 1 320px;min-width:0;font:inherit;padding:12px;border:2px solid var(--lav)}
+  button{font:inherit;font-weight:700;padding:12px 20px;border:0;background:var(--blue);color:#fff;cursor:pointer}
+  .box{background:#fff;border:2px dashed var(--lav);min-height:120px}
+  iframe{display:block;width:100%;height:900px;border:0;background:#fff}
+  .note{background:var(--warn);padding:12px 14px;font-size:14px}
+  .ok{background:var(--mint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Notion form embed test</h1>
+  <p>Paste the public link to a Notion form (Share form &rarr; "Anyone on the web with link"), then press Load.</p>
+  <form id="f">
+    <input id="u" type="url" placeholder="https://....notion.site/... or https://www.notion.so/..." required>
+    <button type="submit">Load</button>
+  </form>
+  <p id="msg" class="note" hidden></p>
+  <div class="box" id="box"></div>
+  <p style="margin-top:16px;font-size:14px">If you can see and fill in the form above, Notion forms embed. If the box stays blank or says the site refused to connect, Notion blocks embedding and the site would link to the form instead.</p>
+</div>
+<script>
+  var f=document.getElementById('f'),u=document.getElementById('u'),box=document.getElementById('box'),msg=document.getElementById('msg');
+  function load(src){
+    box.innerHTML='';
+    var fr=document.createElement('iframe');
+    fr.src=src; fr.title='Notion form'; fr.loading='eager';
+    box.appendChild(fr);
+    msg.hidden=false; msg.className='note';
+    msg.textContent='Loading: '+src;
+    history.replaceState(null,'','?src='+encodeURIComponent(src));
+  }
+  f.addEventListener('submit',function(e){e.preventDefault();if(u.value)load(u.value.trim());});
+  var q=new URLSearchParams(location.search).get('src');
+  if(q){u.value=q;load(q);}
+</script>
+</body>
+</html>
